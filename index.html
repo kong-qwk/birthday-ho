@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>🎂 生日祝福 | Happy Birthday</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Quicksand:wght@300;400;600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 粒子背景 -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- 输入页面 -->
+  <div class="page input-page" id="inputPage">
+    <h1 class="title">🎂 生日祝福 🎂</h1>
+    <p class="subtitle">为TA准备一份特别的惊喜</p>
+    
+    <div class="input-form">
+      <div class="input-group">
+        <label>📝 请输入TA的名字</label>
+        <input type="text" id="nameInput" placeholder="例如：小明" maxlength="20">
+      </div>
+      
+      <div class="input-group">
+        <label>🎂 生日日期 (YYYY-MM-DD)</label>
+        <input type="date" id="birthdayInput">
+      </div>
+      
+      <button class="btn-start" onclick="startWishes()">✨ 开始祝福 ✨</button>
+    </div>
+  </div>
+
+  <!-- 祝福页面 -->
+  <div class="page wish-page hidden" id="wishPage">
+    <!-- 装饰元素 -->
+    <div class="decorations" id="decorations"></div>
+    
+    <header class="wish-header">
+      <h1 class="wish-title">
+        🎂 Happy Birthday <span id="displayName"></span> 🎂
+      </h1>
+      <p class="wish-date" id="displayDate"></p>
+    </header>
+
+    <!-- 蛋糕 -->
+    <div class="cake-container" onclick="lightCandle()">
+      <div class="cake" id="cake">
+        <div class="candle-container">
+          <div class="candle" id="candle1">
+            <div class="candle-flame">🕯️</div>
+          </div>
+          <div class="candle" id="candle2">
+            <div class="candle-flame">🕯️</div>
+          </div>
+          <div class="candle" id="candle3">
+            <div class="candle-flame">🕯️</div>
+          </div>
+        </div>
+        <div class="cake-layer"></div>
+        <div class="cake-layer"></div>
+        <div class="cake-layer"></div>
+      </div>
+      <p class="cake-hint" id="cakeHint">👆 点击蜡烛点燃祝福</p>
+    </div>
+
+    <!-- 生日贺卡 -->
+    <div class="cards-container">
+      <div class="card" id="birthdayCard" onclick="flipCard()">
+        <div class="card-face card-front">
+          <div class="card-icon">🎉</div>
+          <p class="card-text" id="cardText">愿你的每一天都充满阳光和欢笑</p>
+        </div>
+        <div class="card-face card-back">
+          <div class="card-icon">💝</div>
+          <p class="card-text">新的一岁，愿梦想都实现</p>
+        </div>
+      </div>
+      
+      <div class="card-nav">
+        <button onclick="prevCard()">◀</button>
+        <button onclick="nextCard()">▶</button>
+      </div>
+      
+      <div class="card-dots" id="cardDots"></div>
+    </div>
+
+    <!-- 底部模块 -->
+    <div class="bottom-modules">
+      <!-- 心愿瓶 -->
+      <div class="wish-bottle">
+        <button class="bottle-btn" onclick="openBottleModal()" title="写下心愿">🌊</button>
+      </div>
+    </div>
+
+    <div class="footer">
+      Made with 💝 for your special day
+    </div>
+  </div>
+
+  <!-- 音乐视频控制 -->
+  <div class="video-control">
+    <video id="birthdayVideo" loop playsinline>
+      <source src="生日快乐.mp4" type="video/mp4">
+    </video>
+    <button class="video-btn" id="videoBtn" onclick="toggleVideo()">
+      <span id="videoIcon">🎵</span>
+    </button>
+  </div>
+
+  <!-- 心愿瓶弹窗 -->
+  <div class="bottle-modal" id="bottleModal">
+    <div class="bottle-modal-content">
+      <h3>🌊 许下心愿</h3>
+      <textarea id="wishText" placeholder="在这里写下你的心愿..." maxlength="100"></textarea>
+      <div class="bottle-modal-btns">
+        <button class="bottle-save" onclick="saveWish()">💾 存入瓶中</button>
+        <button class="bottle-close" onclick="closeBottleModal()">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
